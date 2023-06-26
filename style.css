@@ -97,3 +97,34 @@
     
 }
 
+
+.main-cont{
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-evenly;
+}
+
+.ticket-cont{
+    height: 10rem;
+    width: 15rem;
+    background-color: grey;
+}
+
+.ticket-color{
+    height: 1rem;
+    
+}
+
+.ticket-id{
+    height: 1.25rem;
+    background-color: azure;
+}
+
+
+.ticket-area{
+    height: 1.75rem;
+    padding: 5px;
+    font-size: 1.25rem;
+}
