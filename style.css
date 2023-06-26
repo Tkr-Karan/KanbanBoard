@@ -66,7 +66,10 @@
     height: 40vh;
     width: 40vw;
     border: 2px solid grey;
-    display: flex;
+    display: none;
+    position: absolute;
+    top: 25vh;
+    left: 30vw;
 }
 
 
@@ -77,11 +80,11 @@
     border: none;
     font-size: 30px;
     resize: none;
-    padding: 10px;
+    padding: 20px;
 }
 
 .priority-color-cont{
-    background-color: rgba(143, 188, 143, 0.324);
+    background-color: rgb(162, 224, 162);
     height: 100%;
     width: 25%;
     display: flex;
@@ -93,7 +96,7 @@
 
 .priority-color{
     height: 3rem;
-    width: 6rem;
+    width: 4rem;
     
 }
 
