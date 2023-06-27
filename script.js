@@ -5,7 +5,9 @@ let textAreaContent = document.querySelector(".textarea-cont");
 let mainContent = document.querySelector(".main-cont");
 let removebtn = document.querySelector(".rmv-btn");
 
-let modalPriorityColor = "";
+let modalPriorityColor = "red";
+
+let color = ["red", "blue", "green", "black"];
 
 var uid = new ShortUniqueId();
 
@@ -35,9 +37,11 @@ for(let i = 0; i < allPriorityColor.length;  i++){
         allPriorityColor[i].classList.add("active");
 
         modalPriorityColor = allPriorityColor[i].classList[1];
-        console.log(modalPriorityColor);
+        // console.log(modalPriorityColor);
 
         // console.log(allPriorityColor[i].classList[1]);
+
+
     })
 
 }
@@ -78,6 +82,35 @@ function createTicket(text){
         if(removeFlag){
             ticketCont.remove();
         }
+    })
+
+    let ticketColor = ticketCont.querySelector(".ticket-color");
+
+    ticketColor.addEventListener("click", function(){
+        // console.log(ticketColor.classList[1]);
+
+        let currentColor = ticketColor.classList[1];
+
+        let currentColorIndex = color.findIndex((col) => {
+            return col == currentColor;
+        });
+
+        // for(let i = 0; i < color.length; i++){
+        //     if(color[i] == currentColor){
+        //         currentColorIndex = i;
+        //         break;
+        //     }
+        // }
+
+        // console.log(currentColorIndex);
+
+        let nextColorIndex = (currentColorIndex+1)%color.length;
+        let nextColor = color[nextColorIndex];
+
+        // console.log(nextColor);
+
+        ticketColor.classList.remove(currentColor);
+        ticketColor.classList.add(nextColor);
     })
 
 }
