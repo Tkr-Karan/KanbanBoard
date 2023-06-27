@@ -123,6 +123,8 @@
 .ticket-id{
     height: 1.25rem;
     background-color: azure;
+    padding-left: 10px;
+    font-size: 0.8rem;
 }
 
 
