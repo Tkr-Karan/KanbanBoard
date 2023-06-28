@@ -13,6 +13,7 @@ var uid = new ShortUniqueId();
 
 let addModal = true;
 let removeFlag = false;
+let lockFlag = false;
 
 addBtn.addEventListener("click", function(){    
     if(addModal){
@@ -22,7 +23,7 @@ addBtn.addEventListener("click", function(){
         modal.style.display = "none";
         addModal = true;
     }
-
+    
 })
 
 
@@ -35,15 +36,15 @@ for(let i = 0; i < allPriorityColor.length;  i++){
             }
         }
         allPriorityColor[i].classList.add("active");
-
+        
         modalPriorityColor = allPriorityColor[i].classList[1];
         // console.log(modalPriorityColor);
-
+        
         // console.log(allPriorityColor[i].classList[1]);
-
-
+        
+        
     })
-
+    
 }
 
 textAreaContent.addEventListener("keydown", function(e){
@@ -66,53 +67,72 @@ function createTicket(text){
     //         <div class="ticket-area">Some Task</div>
     // </div>
     let id = uid();
-
+    
     let ticketCont = document.createElement("div");
     ticketCont.setAttribute("class", "ticket-cont");
-
+    
     // console.log(ticketCont);
     ticketCont.innerHTML = `<div class="ticket-color ${modalPriorityColor}"></div>
-                             <div class="ticket-id">#${id}</div>
-                             <div class="ticket-area">${text}</div> 
-                            `
-
+    <div class="ticket-id">#${id}</div>
+    <div class="ticket-area">${text}</div> 
+    <div class="lock-unlock">
+    <i class="fa-solid fa-lock"></i>
+    </div>
+    `
+    
     mainContent.append(ticketCont);
-
+    
     ticketCont.addEventListener("click", function(){
         if(removeFlag){
             ticketCont.remove();
         }
     })
-
+    
     let ticketColor = ticketCont.querySelector(".ticket-color");
-
+    
     ticketColor.addEventListener("click", function(){
         // console.log(ticketColor.classList[1]);
-
+        
         let currentColor = ticketColor.classList[1];
-
+        
         let currentColorIndex = color.findIndex((col) => {
             return col == currentColor;
         });
-
+        
         // for(let i = 0; i < color.length; i++){
-        //     if(color[i] == currentColor){
-        //         currentColorIndex = i;
-        //         break;
-        //     }
-        // }
+            //     if(color[i] == currentColor){
+                //         currentColorIndex = i;
+                //         break;
+                                            //     }
+                                            // }
+                                            
+                                            // console.log(currentColorIndex);
+                                            
+                                            let nextColorIndex = (currentColorIndex+1)%color.length;
+                                            let nextColor = color[nextColorIndex];
+                                            
+                                            // console.log(nextColor);
+                                            
+                                            ticketColor.classList.remove(currentColor);
+                                            ticketColor.classList.add(nextColor);
+                                        })
+                                        
+    // lock and unlock event listener
+    let lockUnlock = ticketCont.querySelector(".lock-unlock i");
+    let taskArea = ticketCont.querySelector(".ticket-area");
 
-        // console.log(currentColorIndex);
-
-        let nextColorIndex = (currentColorIndex+1)%color.length;
-        let nextColor = color[nextColorIndex];
-
-        // console.log(nextColor);
-
-        ticketColor.classList.remove(currentColor);
-        ticketColor.classList.add(nextColor);
+    lockUnlock.addEventListener("click", function(){
+        if(lockUnlock.classList.contains("fa-lock")){
+            lockUnlock.classList.remove("fa-lock");
+            lockUnlock.classList.add("fa-lock-open");
+            taskArea.setAttribute("contenteditable", "true");
+        }else{
+            lockUnlock.classList.remove("fa-lock-open");
+            lockUnlock.classList.add("fa-lock");
+            taskArea.setAttribute("contenteditable", "false");
+        }
     })
-
+    
 }
 
 
@@ -127,3 +147,4 @@ removebtn.addEventListener("click", function(){
         removeFlag = true;
     }
 })
+
